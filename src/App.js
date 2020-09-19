@@ -39,7 +39,7 @@ export default function App() {
   };
   return (
     <div className="form-container">
-      <form class="register-form">
+      <form class="register-form" onSubmit={handleSubmit}>
         {submitted && (
           <div class="success-message">Success! Thank you for registering</div>
         )}
@@ -52,7 +52,9 @@ export default function App() {
           value={values.firstName}
           onChange={handleFirstNameInputChange}
         />
-        <span id="first-name-error">Please enter a first name</span>
+        {submitted && !values.firstName && (
+          <span id="first-name-error">Please enter a first name</span>
+        )}
         <input
           id="last-name"
           class="form-field"
@@ -62,7 +64,9 @@ export default function App() {
           value={values.lastName}
           onChange={handleLastNameInputChange}
         />
-        <span id="last-name-error">Please enter a last name</span>
+        {submitted && !values.lastName && (
+          <span id="last-name-error">Please enter a last name</span>
+        )}
         <input
           id="email"
           class="form-field"
@@ -72,8 +76,10 @@ export default function App() {
           value={values.email}
           onChange={handleEmailInputChange}
         />
-        <span id="email-error">Please enter an em ail address</span>
-        <button class="form-field" type="submit" onClick={handleSubmit}>
+        {submitted && !values.email && (
+          <span id="email-error">Please enter an em ail address</span>
+        )}
+        <button class="form-field" type="submit">
           Register
         </button>
       </form>
