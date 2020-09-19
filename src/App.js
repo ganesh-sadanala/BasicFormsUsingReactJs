@@ -7,6 +7,7 @@ export default function App() {
     lastName: "",
     email: "",
   });
+  const [valid, setValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const handleFirstNameInputChange = (event) => {
     // Learn usage of event.persist() from
@@ -35,12 +36,15 @@ export default function App() {
     // Since we are not using any stored data,
     // we are not using event.persist()
     event.preventDefault();
+    if (values.firstName && values.lastName && values.email) {
+      setValid(true);
+    }
     setSubmitted(true);
   };
   return (
     <div className="form-container">
       <form class="register-form" onSubmit={handleSubmit}>
-        {submitted && (
+        {submitted && valid && (
           <div class="success-message">Success! Thank you for registering</div>
         )}
         <input
