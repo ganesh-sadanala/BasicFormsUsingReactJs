@@ -7,6 +7,7 @@ export default function App() {
     lastName: "",
     email: "",
   });
+  const [submitted, setSubmitted] = useState(false);
   const handleFirstNameInputChange = (event) => {
     // Learn usage of event.persist() from
     // https://medium.com/@brunogarciagonzalez/reactjs-events-exploration-a295505016f1
@@ -30,10 +31,18 @@ export default function App() {
       email: event.target.value,
     }));
   };
+  const handleSubmit = (event) => {
+    // Since we are not using any stored data,
+    // we are not using event.persist()
+    event.preventDefault();
+    setSubmitted(true);
+  };
   return (
     <div className="form-container">
       <form class="register-form">
-        <div class="success-message">Success! Thank you for registering</div>
+        {submitted && (
+          <div class="success-message">Success! Thank you for registering</div>
+        )}
         <input
           id="first-name"
           class="form-field"
@@ -63,8 +72,8 @@ export default function App() {
           value={values.email}
           onChange={handleEmailInputChange}
         />
-        <span id="email-error">Please enter an email address</span>
-        <button class="form-field" type="submit">
+        <span id="email-error">Please enter an em ail address</span>
+        <button class="form-field" type="submit" onClick={handleSubmit}>
           Register
         </button>
       </form>
